@@ -123,7 +123,7 @@ function registro_virtuale_page_header()
 
     echo '<html>';
     echo '<head>';
-    echo '    <link rel="stylesheet" type="text/css" href="DBEdit.css">';
+    echo '    <link rel="stylesheet" type="text/css" href="DBEdit/DBEdit.css">';
     echo '</head>';
     echo '<body>';
     echo '<h1>REGISTRO VIRTUALE</h1>';
