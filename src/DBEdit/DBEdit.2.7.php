@@ -17,7 +17,7 @@
  * $config mescola colonne da query e colonne da tabella
  * usa costanti per elementi config
  * non e' possibile usare piu' di un dbedit per pagina
- * refactor
+ * rimuovi util_array_key_exists() da DBEdit
  */
 
 
@@ -46,10 +46,11 @@ define( "DBE_CONFIG_USER_PSWD"             , "user_pswd");
 define( "DBE_CONFIG_USER_DB"               , "user_db");
 
 
-
+require_once 'DBEditUtil.1.0.php';
 require_once "DBEManagerSql.1.0.php";
 require_once "DBEManagerPagination.1.1.php";
 require_once "DBEManagerTasks.1.0.php";
+require_once 'DBEManagerFilter.1.0.php';
 
 
 
@@ -91,6 +92,9 @@ class DBEdit
 
     // gestione della paginazione
     private $paginator;
+
+    // gestione dei filtri
+    private $filter_manager;
 
     // gestione dei tasks
     private $task_manager;
@@ -147,6 +151,9 @@ class DBEdit
 
         // paginazione
         $this->paginator = new ManagerPagination( $this->config);
+
+        // filtri
+        $this->filter_manager = new ManagerFilter( $this->config);
 
         // tasks
         $this->task_manager = new ManagerTasks( $this->config);
@@ -406,7 +413,7 @@ class DBEdit
         $html = $this->task_manager->html_selector_javascript();
 
         // inietta javascript per gestion filtri
-        $html .= $this->html_filter_javascript();
+        $html .= $this->filter_manager->html_filter_javascript();
 
         $html .= '<div>'."\n";
 
@@ -870,7 +877,7 @@ class DBEdit
             $this->sql = $this->config["column"][$col_name]["sql_enum"];
 
             // aggiungi filtri
-            $this->sql = $this->sql_add_filter_enum($this->sql, $col_name);
+            $this->sql = $this->filter_manager->sql_add_filter_enum($this->sql, $col_name);
 
             $result = $this->sql_mgr->query($this->sql);
             if (!$result)
@@ -936,7 +943,7 @@ class DBEdit
         }
         $html .= '<BUTTON TYPE="submit" name="azione_submit" value="'.DBE_ACTION_SUBMIT_CANCEL.'" class="'.DBE_STYLE_BUTTON.'">Annulla</button>';
 
-        // filtri
+        // filtri - TODO spostare in ManagerFilter
         if (isset($this->config["column"]))
         {
             foreach( $this->config["column"] as $col_name => $col_info)
@@ -995,31 +1002,8 @@ class DBEdit
         $html .= $this->html_toolbar_button(DBE_ACTION_DELETE);
         $html .= '&nbsp;&nbsp;&nbsp;</TD>'."\n";
 
-        // filtri
-        if ($this->util_array_key_exists("filter", $this->config))
-        {
-            $html .= '<TD class="'.DBE_STYLE_TOOLBAR.'" width="100%">'."\n";
-            foreach( $this->config["column"] as $col_name => $col_info)
-            {
-                if (isset($col_info["filter"]))
-                {
-                    $request_name = $this->prefix . $col_info["name"];
-                    $request_value = isset($_REQUEST[$request_name]) ? $_REQUEST[$request_name] : "";
-
-                    // quando l'utente clicca un filtro resettiamo azione e chiavi
-                    $html .= ucfirst(strtolower($col_info["name"]))
-                            . ' <INPUT NAME="'. $request_name
-                            . '" TYPE="text" VALUE="'. $request_value
-                            . '" STYLE="font-size:10px;" SIZE=10 '
-                            . ' ONCLICK="filter_onclick();" '
-                            . ' ONCHANGE="filter_onchange();" '
-                            . ' >'
-                            . "\n"
-                            ;
-                }
-            }
-            $html .= '</TD>'."\n";
-        }
+        // aggiungi filtri di paginazione
+        $html .= $this->filter_manager->html_input_controls();
 
         // aggiungi bottoni di paginazione
         $html .= '<TD class="'.DBE_STYLE_TOOLBAR.'" align="right">&nbsp;&nbsp;&nbsp;'."\n";
@@ -1033,59 +1017,6 @@ class DBEdit
         $html .= "</TR>\n";
 
         return $html;
-    }
-
-
-
-    /**
-     * Genera javascript per gestione filtri da iniettare prima del form DBEdit
-     *
-     * @return string javascript HTML tag
-     */
-    private function html_filter_javascript()
-    {
-        if ($this->util_array_key_exists("filter", $this->config))
-        {
-            return '
-                    <script>
-                        function filter_onclick( )
-                        {
-                            var azione = document.getElementById("azione");
-                            var pk_values = document.getElementById("pk_values");
-                            var offset = document.getElementById("offset");
-
-                            if (azione)
-                                azione.value = 0;
-
-                            if (pk_values)
-                                pk_values.value = null;
-
-                            if (offset)
-                                offset.value = 0;
-                        }
-                        function filter_onchange( )
-                        {
-                            var dbef = document.getElementById("'.$this->form_name.'");
-                            var azione = document.getElementById("azione");
-                            var pk_values = document.getElementById("pk_values");
-                            var offset = document.getElementById("offset");
-
-                            if (azione)
-                                azione.value = 0;
-
-                            if (pk_values)
-                                pk_values.value = null;
-
-                            if (offset)
-                                offset.value = 0;
-
-                            // submit form
-                            dbef.submit();
-                        }
-                    </script>
-            ';
-        }
-        return "";
     }
 
 
@@ -1432,52 +1363,13 @@ class DBEdit
         if ($this->util_array_key_exists("filter", $this->config)
         ||  $this->task_manager->get_task_name())
         {
-            // append WHERE filters
-            foreach( $this->config["column"] as $col_name => $col_info)
-            {
-                if (isset($col_info["filter"])
-                &&  (is_null($requested_col_name) || ($requested_col_name == $col_name)))
-                {
-                    $request_name = $this->prefix . $col_info["name"];
-                    $request_value = isset($_REQUEST[$request_name]) ? $_REQUEST[$request_name] : "";
-                    if (strlen($request_value))
-                    {
-                        $sql = $this->sql_mgr->sql_select_filter($sql, $col_info["filter"], $request_value);
-                    }
-                }
-            }
+            $sql = $this->filter_manager->sql_add_filter( $sql, $requested_col_name = null);
 
             // append task filters
             if ($this->task_manager->get_task_name()
             &&  $this->task_manager->get_task_action() == DBE_ACTION_SELECT)
             {
                 $sql = $this->sql_mgr->sql_select_where($sql, $this->task_manager->get_task_where());
-            }
-        }
-
-        return $sql;
-    }
-
-
-
-    /**
-     * Add filter to an enum SQL query
-     * @return string the modified SQL
-     */
-    private function sql_add_filter_enum( $sql, $col_name)
-    {
-        // aggiungi filtro
-        if (isset($this->config["column"][$col_name]["filter"]))
-        {
-            // extract the SELECT clause
-            $sql_select = $this->sql_mgr->sql_split_select($sql);
-
-            // append filter
-            $request_name = $this->prefix . $col_name;
-            $request_value = isset($_REQUEST[$request_name]) ? $_REQUEST[$request_name] : "";
-            if (strlen($request_value))
-            {
-                $sql = $this->sql_mgr->sql_select_filter($sql, $sql_select, $request_value);
             }
         }
 

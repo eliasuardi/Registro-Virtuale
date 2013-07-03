@@ -113,7 +113,7 @@ ADD FOREIGN KEY (GENITORE_ID) REFERENCES PERSONA (ID);
 
 
 
-require_once 'DBEdit/DBEdit.2.8.php';
+require_once 'DBEdit/DBEdit.2.7.php';
 
 
 
