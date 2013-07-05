@@ -965,7 +965,7 @@ class DBEdit
         $html = $this->html_usr_message();
 
         if (! isset($this->config["action"])
-        &&  ! $this->util_array_key_exists("filter", $this->config)
+        &&  ! util_array_key_exists("filter", $this->config)
         &&  ! isset($this->config["row_count"]))
         {
             return $html;
@@ -1343,7 +1343,7 @@ class DBEdit
     private function sql_add_filter( $sql, $requested_col_name = null)
     {
         // aggiungi filtri
-        if ($this->util_array_key_exists("filter", $this->config)
+        if (util_array_key_exists("filter", $this->config)
         ||  $this->task_manager->get_task_name())
         {
             $sql = $this->filter_manager->sql_add_filter( $sql, $requested_col_name = null);
@@ -1396,35 +1396,6 @@ class DBEdit
         }
     }
 
-
-
-    /**
-     * Find if key exists in multi dimensional array
-     * @return bool true if found false if not found
-     */
-    private function util_array_key_exists( $key, $array)
-    {
-           if( !is_array( $array))
-           {
-               return false;
-           }
-
-           if(array_key_exists( $key, $array))
-           {
-               return true;
-           }
-
-           foreach( $array as $row )
-           {
-               // recursively search internal arrays
-               if($this->util_array_key_exists( $key, $row))
-               {
-                   return true;
-               }
-           }
-
-           return false;
-    }
 
 } // end of DBEdit
 
