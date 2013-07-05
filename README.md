@@ -1,4 +1,6 @@
+===================================
 INSTALLAZIONE DEL REGISTRO VIRTUALE
+===================================
 
 PRE-REQUISITI:
 <br/>-Connessione a internet
@@ -8,9 +10,9 @@ PRE-REQUISITI:
 <br/> 13.1VC9/EasyPHP-DevServer-13.1VC9-setup.exe/download )
 <br/>-editor (e.g. NetBeans link: https://netbeans.org/downloads/ )
 
-<br/>ISTRUZIONI:
+ISTRUZIONI:
 
-<br/>1- Cliccare su "Clone on Desktop"
+1- Cliccare su "Clone on Desktop"
 <br/>2- Se e' la prima volta che usi Github dovete scaricare il programma 
 <br/>   sul vostro PC dalla pagina che vi esce
 <br/>3- Una volta scaricato ed installato il programma ricliccare "Clone on Desktop"
@@ -24,6 +26,6 @@ PRE-REQUISITI:
 <br/>9- Cliccare sulla cartella di "Github" poi di "Registro-Virtuale" poi di "src" 
 <br/>10-Cliccare su "RegistroVirtuale.classe.php" e dovrebbe funzionare gia' tutto
 
-<br/>Se ci sono problemi contattatemi a 
+Se ci sono problemi contattatemi a 
 
-<br/>eliasuardi@gmail.com
+eliasuardi@gmail.com
