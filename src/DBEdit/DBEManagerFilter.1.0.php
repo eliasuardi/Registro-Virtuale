@@ -161,6 +161,39 @@ class ManagerFilter
         }
         return $sql;
     }
+
+
+
+    /*
+     *
+     *
+     */
+    public function html_hidden_fields()
+    {
+        $html = '';
+        if (isset($this->config["column"]))
+        {
+            foreach( $this->config["column"] as $col_name => $col_info)
+            {
+                if (isset($col_info["filter"]))
+                {
+                    $request_name = $this->config["prefix"] . $col_info["name"];
+                    $request_value = isset($_REQUEST[$request_name]) ? $_REQUEST[$request_name] : "";
+
+                    // propaghiamo valori in hidden fields
+                    $html .= ' <INPUT NAME="'. $request_name
+                            . '" TYPE="hidden" VALUE="'. $request_value
+                            . '">'
+                            . "\n"
+                            ;
+                }
+            }
+        }
+        return $html;
+    }
+
+
+    
 }//end of DBEManagerFilter
 
 

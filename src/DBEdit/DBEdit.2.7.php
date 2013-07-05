@@ -944,24 +944,7 @@ class DBEdit
         $html .= '<BUTTON TYPE="submit" name="azione_submit" value="'.DBE_ACTION_SUBMIT_CANCEL.'" class="'.DBE_STYLE_BUTTON.'">Annulla</button>';
 
         // filtri - TODO spostare in ManagerFilter
-        if (isset($this->config["column"]))
-        {
-            foreach( $this->config["column"] as $col_name => $col_info)
-            {
-                if (isset($col_info["filter"]))
-                {
-                    $request_name = $this->prefix . $col_info["name"];
-                    $request_value = isset($_REQUEST[$request_name]) ? $_REQUEST[$request_name] : "";
-
-                    // propaghiamo valori in hidden fields
-                    $html .= ' <INPUT NAME="'. $request_name
-                            . '" TYPE="hidden" VALUE="'. $request_value
-                            . '">'
-                            . "\n"
-                            ;
-                }
-            }
-        }
+        $html .= $this->filter_manager->html_hidden_fileds();
 
         $html .= '</TD>'."\n";
         $html .= '</TR>'."\n";
