@@ -17,7 +17,6 @@
  * $config mescola colonne da query e colonne da tabella
  * usa costanti per elementi config
  * non e' possibile usare piu' di un dbedit per pagina
- * rimuovi util_array_key_exists() da DBEdit
  */
 
 
