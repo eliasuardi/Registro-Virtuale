@@ -162,7 +162,7 @@ function registro_virtuale_numero_righe()
 
 $server_connection["localhost"] = 'localhost';
 $server_connection["usr_name"] = 'root';
-$server_connection["pswd"] = 'root';
+$server_connection["pswd"] = '';
 $server_connection["db_db"] = 'registro';
 $server_connection["row_count"] = 7;
 
