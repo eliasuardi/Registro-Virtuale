@@ -10,10 +10,10 @@ PRE-REQUISITI:
 
 ISTRUZIONI:
 
- 1- Scaricare il software da https://github.com/ adatto al vostro s.o.(pulsante azzurro Download) 
-    e installarlo (per windows: eseguire il file GitHubSetup.exe appena scaricato)
- 2- Accedere al repository (Registro-Virtuale) dal sito GitHub
- 3- Cliccare "Clone on Desktop"
+ 1- Cliccare su "Clone on Desktop"
+ 2- Se e' la prima volta che usi Github dovete scaricare il programma 
+    sul vostro PC dalla pagina che vi esce
+ 3- Una volta scaricato ed installato il programma ricliccare "Clone on Desktop"
  4- Spostare la cartella di "Github" (che si trovera' in C:\Documents and Settings\)
     nella cartella del server php
     Se si apre il programma di Github e si va nelle "local repositories",
@@ -23,22 +23,18 @@ ISTRUZIONI:
     di Registro-Virtuale.
     Cliccare poi FIND IT e cercare la cartella di Registro-Virtuale che si trova nella 
     cartella Github che hai appena spostato cliccare poi ok.
- 5- Avviare il server PHP
- 6- Importare il database selezionando sql/registro.sql dalla cartella clonata
- 7- Accedere alla root del webserver PHP (di solito localhost o 127.0.0.1)
- 8- Cliccare sulla cartella "Github", poi "Registro-Virtuale" ed infine "src" 
- 9- Dovrebbe aprirsi la pagina iniziale
+ 5- Far partire il server PHP
+ 6- Andare sul sito corrispondente al phpmyadmin del server MySQL e cliccare "Importa"
+ 7- Selezionare il file che contiene l'SQL necessario per 
+    creare il database e cliccare "Vai"
+ 8- Andare sul sito del server PHP (di solito localhost o 127.0.0.1)
+ 9- Cliccare sulla cartella di "Github" poi di "Registro-Virtuale" poi di "src" 
+ 10-Cliccare su "RegistroVirtuale.classe.php" e dovrebbe funzionare gia' tutto
     Se ritorna l'errore:
     Warning: mysql_connect(): Access denied...
-    significa che la password per entrare nel server MySQL e' sbagliata e va modificata.
+    significa che la password per entrare nel server MySQL e' sbagliato.
     Per risolvere il problema andare nella cartella di github sul tuo computer.
-	Aprire con un editor di testo il file RegistroVirtuale.1.3.php nella cartella src
-	Modificare la riga 165
-	$server_connection["pswd"] = 'root';
-	in
-	$server_connection["pswd"] = ''; // per toglierla (oppure inserire tra gli apici la password differente)
-    Riprovare.
-	
+
 Se ci sono problemi contattatemi a 
 
 eliasuardi@gmail.com
