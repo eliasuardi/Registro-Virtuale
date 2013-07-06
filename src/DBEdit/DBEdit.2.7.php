@@ -943,7 +943,7 @@ class DBEdit
         $html .= '<BUTTON TYPE="submit" name="azione_submit" value="'.DBE_ACTION_SUBMIT_CANCEL.'" class="'.DBE_STYLE_BUTTON.'">Annulla</button>';
 
         // filtri - TODO spostare in ManagerFilter
-        $html .= $this->filter_manager->html_hidden_fileds();
+        $html .= $this->filter_manager->html_hidden_fields();
 
         $html .= '</TD>'."\n";
         $html .= '</TR>'."\n";
