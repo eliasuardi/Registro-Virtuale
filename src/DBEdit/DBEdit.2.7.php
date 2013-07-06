@@ -1,25 +1,5 @@
 <?php
 
-/* TODO LIST
-
- * rinomina task manager get_task to get_insert, etc...
- * filtri con nome
- * filtri numerici, viste...
- * crea classe FilterControl
- * sorting
- * prova a inserire un voto non numerico
- * task manager non gestisce filtri non numerici
- * valutazione si puo' usare anche per programmare verifiche,
-   interrogazioni, etc... aggiungere descrizione, stato...
-   valutazione di classe o del singolo?
- * configurazione di task_link[param] deve essere come per task[filter]
- * togliere config table_pk e table_pk_auto
- * $config mescola colonne da query e colonne da tabella
- * usa costanti per elementi config
- * non e' possibile usare piu' di un dbedit per pagina
- */
-
-
 
 define( "DBE_ACTION_SELECT"         , 0);
 define( "DBE_ACTION_INSERT"         , 1);

@@ -1,15 +1,7 @@
 <?php
 /*
- * TO DO LIST DBEManagerFilter:
+ * Gestione dei filtri
  * 
- * -aggiungere i commenti
- * -gestione dei fields html
- * -gestione dei hidden fields
- * -generazione sql delegata al DBEManagerSql
- * -usare filter_manager in DBEdit
- * -spostare le funzioni di task_manager al task manager
- * -aggiungere reference al sql manager
- * -spostare util_array_key_exists in un modulo comune
  */
 
 class ManagerFilter

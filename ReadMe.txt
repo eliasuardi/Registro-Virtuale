@@ -7,6 +7,7 @@ PRE-REQUISITI:
   link: http://sourceforge.net/projects/quickeasyphp/files/EasyPHP-DevServer/
   13.1VC9/EasyPHP-DevServer-13.1VC9-setup.exe/download )
  -editor (e.g. NetBeans link: https://netbeans.org/downloads/ )
+ -scaricare il codice da github: https://github.com/eliasuardi/Registro-Virtuale
 
 ISTRUZIONI:
 
@@ -24,10 +25,17 @@ ISTRUZIONI:
     Cliccare poi FIND IT e cercare la cartella di Registro-Virtuale che si trova nella 
     cartella Github che hai appena spostato cliccare poi ok.
  5- Avviare il server PHP
- 6- Importare il database selezionando sql/registro.sql dalla cartella clonata
- 7- Accedere alla root del webserver PHP (di solito localhost o 127.0.0.1)
- 8- Cliccare sulla cartella "Github", poi "Registro-Virtuale" ed infine "src" 
- 9- Dovrebbe aprirsi la pagina iniziale
+ 6- Creare il database registro;
+ 7- Importare le tabelle selezionando prima sql/creatabelle.sql poi caricadati.sql dalla cartella clonata
+    Alternativa: scrivere nel command line: 
+         mysql --user=root --password=root
+         create database registro;
+         use registro;
+         source creatabelle.sql;
+         source caricadati.sql;
+ 8- Accedere alla root del webserver PHP (di solito localhost o 127.0.0.1)
+ 9- Cliccare sulla cartella "Github", poi "Registro-Virtuale" ed infine "src" 
+ 10-Dovrebbe aprirsi la pagina iniziale
     Se ritorna l'errore:
     Warning: mysql_connect(): Access denied...
     significa che la password per entrare nel server MySQL e' sbagliata e va modificata.

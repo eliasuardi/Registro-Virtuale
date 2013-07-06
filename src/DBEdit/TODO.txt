@@ -1,0 +1,20 @@
+-creare creatabelle.sql e caricadati.sql
+-fare registro_orario
+-caricamento dati della segreteria
+-registrazione utenti
+-controllo accesso
+-rinomina task manager get_task to get_insert, etc...
+-filtri con nome
+-filtri numerici, viste...
+-sorting
+-prova a inserire un voto non numerico
+-task manager non gestisce filtri non numerici
+-valutazione si puo' usare anche per programmare verifiche,
+ interrogazioni, etc... aggiungere descrizione, stato...
+-valutazione di classe o del singolo?
+-configurazione di task_link[param] deve essere come per task[filter]
+-togliere config table_pk e table_pk_auto
+-$config mescola colonne da query e colonne da tabella
+-usa costanti per elementi config
+-non e' possibile usare piu' di un dbedit per pagina
+
