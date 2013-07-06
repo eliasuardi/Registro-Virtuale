@@ -1,4 +1,3 @@
--creare creatabelle.sql e caricadati.sql
 -fare registro_orario
 -caricamento dati della segreteria
 -registrazione utenti
