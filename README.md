@@ -2,7 +2,7 @@
 
 PRE- 
 REQUISITI:
-<br/>-Connessione a internet
+<br/>-Connessione a internet con adsl
 <br/>-Server PHP e MySQL funzionante 
 <br/>(e.g. Easyphp 
 <br/> link: http://sourceforge.net/projects/quickeasyphp/files/EasyPHP-DevServer/
