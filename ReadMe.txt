@@ -13,7 +13,7 @@ ISTRUZIONI:
  1- Scaricare il software da https://github.com/ adatto al vostro s.o.(pulsante azzurro Download) 
     e installarlo (per windows: eseguire il file GitHubSetup.exe appena scaricato)
  2- Accedere al repository (Registro-Virtuale) dal sito GitHub
- 3- Cliccare "Clone on Desktop"
+ 3- Cliccare "Clone in Desktop"
  4- Spostare la cartella di "Github" (che si trovera' in C:\Documents and Settings\)
     nella cartella del server php
     Se si apre il programma di Github e si va nelle "local repositories",
