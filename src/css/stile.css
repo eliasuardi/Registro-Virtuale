@@ -1,0 +1,8 @@
+body{
+	margin:20%;
+	font-family:Verdana;
+	text-align:center;
+	border:dashed blue 5px;
+}
+h1{padding:20;}
+.invio{color:blue;font-family:verdana;font-size:20px;}
